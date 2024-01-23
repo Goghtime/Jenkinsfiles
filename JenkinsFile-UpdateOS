@@ -25,7 +25,7 @@ pipeline {
         stage('Run Ansible Playbook') {
             steps {
                 // Your Ansible playbook execution step goes here
-                sh "ansible-playbook -i hosts dnsmasq/update-dnsnasq-conf.yml"
+                sh "ansible-playbook -i hosts dnsmasq/update-dnsmasq-conf.yml"
             }
         }
     }
