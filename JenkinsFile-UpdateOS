@@ -14,7 +14,14 @@ pipeline {
             }
         }
     
-
+        // testing what working path
+        stage('Print Workspace Path') {
+            steps {
+                sh "pwd"
+                sh "ls -l"
+            }
+        }
+        
         stage('Run Ansible Playbook') {
             steps {
                 // Your Ansible playbook execution step goes here
