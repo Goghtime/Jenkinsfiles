@@ -2,18 +2,18 @@ pipeline {
     agent {
         label 'ansible'
     }
-    environment {
-        GIT_HOME = tool name: 'Default', type: 'Tool'
-    }
-    stages {
-        stage('Checkout Git Repository') {
+
+    stages {        
+        stage('Git Checkout') {
             steps {
-                sshagent(['git']) {
-                    // Use the sshagent step to provide SSH credentials
-                    sh "${GIT_HOME}/bin/git clone git@github.com:Goghtime/Lab.git"
+                script {
+                    git branch: 'main',
+                        credentialsId: 'git',
+                        url: 'git@github.com:Goghtime/Lab.git'
                 }
             }
         }
+    
 
         stage('Run Ansible Playbook') {
             steps {
