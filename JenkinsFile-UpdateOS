@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script {
                     git branch: 'main',
-                        credentialsId: 'git',
+                        credentialsId: 'Goghlabs-git',
                         url: 'git@github.com:Goghtime/Lab.git'
                 }
             }
