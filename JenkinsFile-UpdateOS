@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout Git Repository') {
             steps {
-                sshagent(['your-ssh-credentials']) {
+                sshagent(['git']) {
                     // Use the sshagent step to provide SSH credentials
                     sh "${GIT_HOME}/bin/git clone git@github.com:Goghtime/Lab.git"
                 }
