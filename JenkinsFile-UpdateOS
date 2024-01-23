@@ -1,0 +1,23 @@
+pipeline {
+    agent {
+        label 'ansible'
+    }
+
+    stages {
+        stage('Checkout Git Repository') {
+            steps {
+                sshagent(['your-ssh-credentials']) {
+                    // Use the sshagent step to provide SSH credentials
+                    git branch: 'main', credentialsId: 'git', url: 'git@github.com:Goghtime/Lab.git'
+                }
+            }
+        }
+
+        stage('Run Ansible Playbook') {
+            steps {
+                // Your Ansible playbook execution step goes here
+                sh "ansible-playbook -i /hosts /dnsmasq/update-dnsnasq-conf.yml"
+            }
+        }
+    }
+}
