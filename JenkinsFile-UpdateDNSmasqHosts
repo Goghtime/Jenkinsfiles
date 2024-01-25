@@ -1,0 +1,32 @@
+pipeline {
+    agent {
+        label 'ansible'
+    }
+
+    stages {        
+        stage('Git Checkout') {
+            steps {
+                script {
+                    git branch: 'main',
+                        credentialsId: 'GLA',
+                        url: 'git@github.com:Goghtime/Lab.git'
+                }
+            }
+        }
+    
+        stage('Print Workspace Path') {
+            steps {
+                sh "pwd"
+                sh "ls -l"
+            }
+        }
+        
+        stage('Run Ansible Playbook') {
+            steps {
+                withCredentials([string(credentialsId: 'ANSIBLE_SUDO_PASSWORD', variable: 'ANSIBLE_SUDO_PASSWORD')]) {
+                    sh "ansible-playbook -i hosts dnsmasq/update-hosts.yml -K --extra-vars 'ansible_become_pass=${ANSIBLE_SUDO_PASSWORD}'"
+                }
+            }
+        }
+    }
+}
