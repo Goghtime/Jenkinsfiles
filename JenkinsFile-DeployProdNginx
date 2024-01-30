@@ -24,7 +24,7 @@ pipeline {
         stage('Run Ansible Playbook') {
             steps {
                 withCredentials([string(credentialsId: 'ANSIBLE_SUDO_PASSWORD', variable: 'ANSIBLE_SUDO_PASSWORD')]) {
-                    sh "ansible-playbook -i Deploy/hosts Deploy/PROD-NGINX01.yml -K --vault-password-file '/root/ansible' --extra-vars 'ansible_become_pass=${ANSIBLE_SUDO_PASSWORD}'"
+                    sh "ansible-playbook -i Deploy/hosts Deploy/PROD-NGINX01.yml -K --vault-password-file '/root/Ansible' --extra-vars 'ansible_become_pass=${ANSIBLE_SUDO_PASSWORD}'"
                 }
             }
         }
